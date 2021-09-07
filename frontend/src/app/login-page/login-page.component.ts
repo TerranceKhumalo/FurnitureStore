@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -9,11 +9,19 @@ import { FormControl } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
 
-  name = new FormControl('hello there');
+  loginForm = new FormGroup({
+    userEmail: new FormControl('hello there'),
+    userPassword: new FormControl()
+  });
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.loginForm.value);
   }
 
 }
