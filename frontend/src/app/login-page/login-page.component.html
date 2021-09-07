@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row login-box">
     <div class="col-sm-6">
       <img
         src="../../assets/images/Rectangle 140 (1).jpg"
@@ -7,14 +7,17 @@
       />
     </div>
     <!--ROW SPLIT -->
-    <div class="col-sm-6">
+    <div class="col-sm-6 logo-main">
+        <div>
+            <img src="../../assets/images/logo-2.png" alt="logo">
+        </div>
         <h4>Welcome Back</h4>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="user-email">Your Email</label>
           <input
             id="name"
-            class="form-control "
+            class="form-control form-control-lg"
             type="email"
             formControlName="userEmail"
             placeholder="ex: julie@gmail.com"
@@ -26,12 +29,15 @@
           <input
             id="user-password"
             type="password"
-            class="form-control"
+            class="form-control form-control-lg"
             formControlName="userPassword"
           />
         </div>
         <div class="d-grid gap-2">
           <button type="submit" class="btn btn-primary btn-lg btn-big btn-color">Sign In</button>
+        </div>
+        <div>
+            <p>New member? <link rel="stylesheet" href=""> Register Now</p>
         </div>
       </form>
     </div>
