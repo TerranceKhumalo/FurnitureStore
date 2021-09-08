@@ -12,6 +12,9 @@
             <img src="../../assets/images/logo-2.png" alt="logo">
         </div>
         <h4>Welcome Back</h4>
+        <div id="alert-box" class="alert alert-warning" role="alert" *ngIf="inValidLogin">
+          {{errorMessage}}
+        </div>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="user-email">Your Email</label>
