@@ -1,4 +1,4 @@
-package com.khumaloterrance.furniture;
+package com.khumaloterrance.furniture.restController;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
