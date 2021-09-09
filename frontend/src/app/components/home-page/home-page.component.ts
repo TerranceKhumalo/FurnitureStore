@@ -14,7 +14,11 @@ homeMessage: string = '';
 
   ngOnInit(): void {
     this.homeService.getHomePage().subscribe(
-      response => this.successfulRequest(response),
+      response =>{
+        this.successfulRequest(response)
+        console.log(response);
+        
+      },
       error => {
         this.unsuccessfulRequest(error);
         console.error(error);
@@ -23,7 +27,7 @@ homeMessage: string = '';
   }
 
   successfulRequest(response: any){
-    this.homeMessage = response.message;
+    this.homeMessage = response;
   }
   unsuccessfulRequest(response: any){
     this.homeMessage = response.message;
