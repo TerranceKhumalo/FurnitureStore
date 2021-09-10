@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_URL } from 'src/app/app.constents';
 
 export class HelloBean{
   constructor(public message: string){}
@@ -9,18 +10,11 @@ export class HelloBean{
   providedIn: 'root',
 })
 export class HomeDataService {
-  // private homeUrl = 'http://localhost:8080/home';
 
   constructor(private http: HttpClient) {}
 
   getHomePage() {
-    let basicAuthString = this.createBasicAuthHeader();
-    const headers = new HttpHeaders({
-      Authorization: basicAuthString,
-      responseType: 'text'
-    });
-    
-    return this.http.get<string>('http://localhost:8080/home', {headers});
+    return this.http.get<string>(`${API_URL}/home`);
   }
 
   createBasicAuthHeader() {

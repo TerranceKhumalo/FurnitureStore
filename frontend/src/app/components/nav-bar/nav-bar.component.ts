@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HardcodedAuthService } from 'src/app/services/hardcoded-auth.service';
+import { BasicAuthService } from 'src/app/services/basic-auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,17 +10,17 @@ export class NavBarComponent implements OnInit {
 
   public isMenuCollapsed = true;
 
-  constructor(private hardcodedAuth: HardcodedAuthService) { }
+  constructor(private basicAuth: BasicAuthService) { }
 
   ngOnInit(): void {
   }
 
   isUserLoggedIn(): boolean{
-    return this.hardcodedAuth.isUserLoggedIn();
+    return this.basicAuth.isUserLoggedIn();
   }
 
   logout() {
-    this.hardcodedAuth.logout();
+    this.basicAuth.logout();
     this.isMenuCollapsed = true;
   }
 

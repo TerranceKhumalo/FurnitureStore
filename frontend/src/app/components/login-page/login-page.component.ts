@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HardcodedAuthService } from 'src/app/services/hardcoded-auth.service';
+import { BasicAuthService } from 'src/app/services/basic-auth.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
     userPassword: new FormControl()
   });
 
-  constructor(private hardcodedAuth: HardcodedAuthService, private router: Router) { }
+  constructor(private basicAuth: BasicAuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -29,13 +29,21 @@ export class LoginPageComponent implements OnInit {
     let user = this.loginForm.value.userEmail;
     let pass = this.loginForm.value.userPassword;
     
-    if(this.hardcodedAuth.login(user, pass)){
-      this.router.navigate(['']);
-      this.inValidLogin = false;
-    }else{
-      this.inValidLogin = true;
-    }
+    this.loginUser(user, pass);
+  }
 
+  loginUser(username: string, password: string){
+    this.basicAuth.executeBasicAuth(username, password).subscribe(
+      res=>{
+        console.log("User loged in", res);
+        this.router.navigate(['']);
+        this.inValidLogin = false;
+      },
+      err=>{
+        console.log("There was an error!");
+        this.inValidLogin = true;
+      }
+    );
   }
 
 }

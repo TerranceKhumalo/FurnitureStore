@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HardcodedAuthService } from './hardcoded-auth.service';
+import { BasicAuthService } from './basic-auth.service';
 
-describe('HardcodedAuthService', () => {
-  let service: HardcodedAuthService;
+describe('BasicAuthService', () => {
+  let service: BasicAuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HardcodedAuthService);
+    service = TestBed.inject(BasicAuthService);
   });
 
   it('should be created', () => {
