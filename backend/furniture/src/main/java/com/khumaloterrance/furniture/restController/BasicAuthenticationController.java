@@ -18,4 +18,5 @@ public class BasicAuthenticationController {
         httpHeaders.setContentType(org.springframework.http.MediaType.TEXT_PLAIN);
         return  new ResponseEntity<String>("\" You are authenticated \"", httpHeaders, HttpStatus.OK);
     }
+    //eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTYzMjE0NjYxNCwiaWF0IjoxNjMxNTQxODE0fQ.WZpWSRrcth2DOm1YWFVreO_fXwEVQx501PkUX16HPNk0mLoN_o00N8gegj2LOPIJkFo6I7Umj8khvRH1--TwbA
 }

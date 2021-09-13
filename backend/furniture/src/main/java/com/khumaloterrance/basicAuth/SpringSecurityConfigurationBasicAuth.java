@@ -1,4 +1,4 @@
-package com.khumaloterrance.furniture.basicAuth;
+package com.khumaloterrance.basicAuth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
