@@ -1,4 +1,6 @@
-package com.khumaloterrance.furniture.authJWT;
+package com.khumaloterrance.furniture.authJWT.resource;
+
+import java.io.Serializable;
 
 public class JwtTokenRequest implements Serializable {
 
