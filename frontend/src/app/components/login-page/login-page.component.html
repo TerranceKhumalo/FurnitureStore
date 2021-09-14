@@ -37,11 +37,9 @@
           />
         </div>
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary btn-lg btn-big btn-color">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-lg btn-big btn-color" [disabled]="!loginForm.valid">Sign In</button>
         </div>
-        <div>
-            <p>New member? <link rel="stylesheet" href=""> Register Now</p>
-        </div>
+            <p class="center-text">New member? <a class="" routerLink ="/register">Register Now</a></p>
       </form>
     </div>
   </div>

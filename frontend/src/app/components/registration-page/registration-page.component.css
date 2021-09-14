@@ -1,0 +1,25 @@
+.btn-big{
+    width: 100%;
+    display: block;
+}
+h4{
+    font-weight: bold;
+}
+
+#alert-box{
+    margin-bottom: 20px;
+}
+
+.logo-main div, h4{
+    margin-bottom: 30px;
+}
+.logo-main div:last-child{
+    margin-bottom: 0;
+}
+
+.login-box{
+    box-shadow: 5px 5px 2.5px #aaaaaa;
+}
+.center-text{
+    text-align: center;
+}
