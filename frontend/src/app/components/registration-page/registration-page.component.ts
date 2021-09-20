@@ -9,10 +9,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RegistrationPageComponent implements OnInit {
 
   errorMessage: string = 'Invalid username or password';
+  customer = {
+    userName: "hello"
+  }
   inValidLogin: boolean = false;
 
   registrationForm = new FormGroup({
-    userName: new FormControl('', [
+    userName: new FormControl(this.customer.userName, [
       Validators.required,
       Validators.minLength(4),
     ]),
@@ -33,6 +36,6 @@ export class RegistrationPageComponent implements OnInit {
 
   onSubmit(){}
 
-  // get userName() { return this.registrationForm.get('userName'); }
+  get userName() { return this.registrationForm.get('userName'); }
 
 }

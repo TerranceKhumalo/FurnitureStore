@@ -1,9 +1,10 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row login-box">
         <div class="col-sm-6">
             <img src="../../assets/images/Rectangle 140 (1).jpg" alt="photo of a couch" />
-        </div>
+        </div>  -->
         <!--ROW SPLIT -->
+        <!--
         <div class="col-sm-6 logo-main">
             <div>
                 <img src="../../assets/images/logo-2.png" alt="logo">
@@ -15,8 +16,8 @@
             <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="user-name">Your Name</label>
-                    <input id="name" class="form-control form-control-lg" type="text" formControlName="userName"
-                        placeholder="ex: Timmy" />
+                    <input id="userName" class="form-control form-control-lg" type="text" formControlName="userName"
+                        placeholder="ex: Timmy" required/>
                     <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert alert-danger">
 
                         <div *ngIf="userName.errors?.required">
@@ -46,4 +47,4 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
