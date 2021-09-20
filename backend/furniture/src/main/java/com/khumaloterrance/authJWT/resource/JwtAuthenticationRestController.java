@@ -1,7 +1,7 @@
-package com.khumaloterrance.furniture.authJWT.resource;
+package com.khumaloterrance.authJWT.resource;
 
-import com.khumaloterrance.furniture.authJWT.JwtTokenUtil;
-import com.khumaloterrance.furniture.authJWT.JwtUserDetails;
+import com.khumaloterrance.authJWT.JwtTokenUtil;
+import com.khumaloterrance.authJWT.JwtUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

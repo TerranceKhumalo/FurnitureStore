@@ -1,4 +1,4 @@
-package com.khumaloterrance.furniture.authJWT.resource;
+package com.khumaloterrance.authJWT.resource;
 
 import java.io.Serializable;
 

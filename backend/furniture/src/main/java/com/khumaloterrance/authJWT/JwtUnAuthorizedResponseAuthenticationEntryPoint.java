@@ -1,4 +1,4 @@
-package com.khumaloterrance.furniture.authJWT;
+package com.khumaloterrance.authJWT;
 
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

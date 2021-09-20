@@ -1,4 +1,4 @@
-package com.khumaloterrance.furniture.authJWT;
+package com.khumaloterrance.authJWT;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;
