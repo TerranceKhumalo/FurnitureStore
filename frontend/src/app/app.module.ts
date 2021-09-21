@@ -12,6 +12,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { HttpInterceptBasicAuthService } from './services/http/http-intercept-basic-auth.service';
+import { ProductsPageComponent } from './components/products-page/products-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpInterceptBasicAuthService } from './services/http/http-intercept-ba
     LoginPageComponent,
     HomePageComponent,
     RegistrationPageComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ProductsPageComponent
   ],
   imports: [
     BrowserModule,
