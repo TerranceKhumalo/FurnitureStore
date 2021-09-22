@@ -10,6 +10,7 @@ import { RegistrationPageComponent } from './components/registration-page/regist
 const routes: Routes = [
   {path: '', component: HomePageComponent, canActivate: [RouterGuard]},
   {path: 'login', component: LoginPageComponent},
+  {path: 'category/:id', component: ProductsPageComponent},
   {path: 'shop', component: ProductsPageComponent},
   {path: 'register', component: RegistrationPageComponent},
   {path: '**', component: ErrorPageComponent}
