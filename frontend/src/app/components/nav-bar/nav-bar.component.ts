@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { OktaAuthService } from '@okta/okta-angular';
 import { BasicAuthService } from 'src/app/services/basic-auth.service';
 
 @Component({
@@ -8,20 +10,33 @@ import { BasicAuthService } from 'src/app/services/basic-auth.service';
 })
 export class NavBarComponent implements OnInit {
 
-  public isMenuCollapsed = true;
+  public isAuthenticated: boolean = false;
+  public userFullName: string | undefined;
 
-  constructor(private basicAuth: BasicAuthService) { }
+  constructor(private oktaAuthService: OktaAuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.oktaAuthService.$authenticationState.subscribe(
+      (result)=>{
+        this.isAuthenticated = result
+        this.getUserDetails();
+      }
+    );
   }
 
-  isUserLoggedIn(): boolean{
-    return this.basicAuth.isUserLoggedIn();
+  //Version 2
+  getUserDetails() {
+    if (this.isAuthenticated) {
+      this.oktaAuthService.getUser().then(
+        res=>{this.userFullName = res.name}
+      )
+    }
   }
 
+  //version 2 logout
   logout() {
-    this.basicAuth.logout();
-    this.isMenuCollapsed = true;
+    this.oktaAuthService.signOut();
+    this.router.navigate(['/login']);
   }
 
 }

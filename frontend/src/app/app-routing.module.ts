@@ -1,18 +1,29 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { RouterGuard } from './auth/router.guard';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import {LoginPageComponent} from './components/login-page/login-page.component';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
+import { OktaCallbackComponent } from '@okta/okta-angular';
+
+// const oktaConfig = Object.assign({
+//   onAuthRequired: (inject: { get: (arg0: typeof Router) => any; })=>{
+//     const router = inject.get(Router);
+//     router.navigate(['/login']);
+//   }
+// }, myAppConfig.oidc);
+
 
 const routes: Routes = [
-  {path: '', component: HomePageComponent, canActivate: [RouterGuard]},
+  {path: 'home', component: HomePageComponent},
+  {path: '', redirectTo: '/shop', pathMatch: 'full'},
+  {path: 'shop', component: ProductsPageComponent},
+  {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'category/:id', component: ProductsPageComponent},
   {path: 'search/:keyword', component: ProductsPageComponent},
-  {path: 'shop', component: ProductsPageComponent},
   {path: 'register', component: RegistrationPageComponent},
   {path: '**', component: ErrorPageComponent}
   
