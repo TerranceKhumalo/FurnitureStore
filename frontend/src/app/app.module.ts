@@ -14,6 +14,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import { HttpInterceptBasicAuthService } from './services/http/http-intercept-basic-auth.service';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductCategoryMenuComponent } from './components/product-category-menu
     RegistrationPageComponent,
     ErrorPageComponent,
     ProductsPageComponent,
-    ProductCategoryMenuComponent
+    ProductCategoryMenuComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

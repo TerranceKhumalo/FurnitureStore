@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: '', component: HomePageComponent, canActivate: [RouterGuard]},
   {path: 'login', component: LoginPageComponent},
   {path: 'category/:id', component: ProductsPageComponent},
+  {path: 'search/:keyword', component: ProductsPageComponent},
   {path: 'shop', component: ProductsPageComponent},
   {path: 'register', component: RegistrationPageComponent},
   {path: '**', component: ErrorPageComponent}

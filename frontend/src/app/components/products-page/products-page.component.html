@@ -8,16 +8,39 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
         <div *ngFor="let product of productList">
           <div class="col">
-            <div class="card border-light h-100 text-center" style="width: 100%;">
-              <img src="{{product.imageUrl}}" class="card-img-top" alt="product image" width="100%">
+            <div
+              class="card border-light h-100 text-center"
+              style="width: 100%"
+            >
+              <img
+                src="{{ product.imageUrl }}"
+                class="card-img-top"
+                alt="product image"
+                width="100%"
+              />
               <div class="card-body">
-                <p class="card-text">{{product.name}}</p>
-                <h5 class="card-title">{{product.unitPrice | currency: 'USD'}}</h5>
-                <a href="#" class="btn btn-primary btn-color ">Add to Cart</a>
+                <p class="card-text">{{ product.name }}</p>
+                <h5 class="card-title">
+                  {{ product.unitPrice | currency: "USD" }}
+                </h5>
+                <a href="#" class="btn btn-success btn-color">Add to Cart</a>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <!-- If products not found display this-->
+      <div
+        *ngIf="productList?.length == 0"
+        class="alert alert-warning col-md-12 mt-5"
+        role="alert"
+      >
+        <h4 class="alert-heading"><strong> Products not found.</strong></h4>
+        <hr>
+        <p>
+          The product that you searched for does not exist. Please check your
+          search keyword for any mistakes.
+        </p>
       </div>
     </div>
   </div>
