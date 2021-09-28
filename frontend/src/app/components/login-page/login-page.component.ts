@@ -19,10 +19,6 @@ export class LoginPageComponent implements OnInit {
   inValidLogin: boolean = false;
   oktaSignin: any;
 
-  loginForm = new FormGroup({
-    userEmail: new FormControl('hello there'),
-    userPassword: new FormControl()
-  });
 
   constructor(private basicAuth: BasicAuthService, private router: Router, private oktaAuthService: OktaAuthService) { 
     this.oktaSignin = new OktaSignIn({
