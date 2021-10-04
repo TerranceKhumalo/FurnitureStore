@@ -7,6 +7,7 @@ import {LoginPageComponent} from './components/login-page/login-page.component';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 // const oktaConfig = Object.assign({
 //   onAuthRequired: (inject: { get: (arg0: typeof Router) => any; })=>{
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
   {path: 'shop', component: ProductsPageComponent},
+  {path: 'products/:id', component: ProductDetailComponent},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'category/:id', component: ProductsPageComponent},

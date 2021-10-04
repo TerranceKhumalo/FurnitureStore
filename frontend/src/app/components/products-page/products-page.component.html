@@ -12,18 +12,20 @@
               class="card border-light h-100 text-center"
               style="width: 100%"
             >
+            <a routerLink="/products/{{product.id}}" routerLinkActive="router-link-active" >
               <img
-                src="{{ product.imageUrl }}"
+                [src]="product.imageUrl"
                 class="card-img-top"
                 alt="product image"
                 width="100%"
               />
+            </a>
               <div class="card-body">
                 <p class="card-text">{{ product.name }}</p>
                 <h5 class="card-title">
                   {{ product.unitPrice | currency: "USD" }}
                 </h5>
-                <a href="#" class="btn btn-success btn-color">Add to Cart</a>
+                <a routerLink="/products/{{product.id}}" routerLinkActive="router-link-active" class="btn btn-success btn-color">Add to Cart</a>
               </div>
             </div>
           </div>

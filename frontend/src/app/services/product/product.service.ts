@@ -10,8 +10,6 @@ import { ProductCategory } from 'src/app/common/product-category';
 })
 export class ProductService {
   
-  
-
   private productURl = 'http://localhost:8080/api/products';
   private categoryURL = 'http://localhost:8080/api/product-category';
 
@@ -41,6 +39,10 @@ export class ProductService {
     return this.httpClient.get<GetResponseProductCategory>(this.categoryURL).pipe(
       map(respose=> respose._embedded.productCategory)
     );
+  }
+
+  getProduct(productId: number): Observable<Product>{
+    return this.httpClient.get<Product>(`${this.productURl}/${productId}`);
   }
   
 }
