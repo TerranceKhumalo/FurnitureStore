@@ -1,2 +1,21 @@
-<p>{{product.id}}</p>
-<p>{{product.name}}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <img class="img-fluid" [src]="product.imageUrl" alt="furniture iteam">
+        </div>
+
+        <div class="col-12 col-sm-6 text-start">
+            <h3 class="fw-bold">{{product.name}}</h3>
+            <h4 >{{product.unitPrice | currency}}</h4>
+            <p>{{product.description}}</p>
+            <hr>
+            <div class="input-group">
+                <input class="form-control" type="number" name="" id="">
+                <button class="btn btn-lg" type="submit">Add to Cart</button>
+            </div>
+            <hr>
+            <p class="text-muted">SKU: {{product.sku}}</p>
+        </div>
+
+    </div>
+</div>

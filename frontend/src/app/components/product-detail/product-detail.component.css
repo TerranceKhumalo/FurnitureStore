@@ -1,0 +1,9 @@
+h4{
+    font-weight: bolder;
+}
+
+input[type=number]{
+    width: 10px;
+    border-width: 2px;
+    border-color: black;
+}
