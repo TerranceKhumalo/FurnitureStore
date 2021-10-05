@@ -21,6 +21,14 @@ export class ProductService {
 
     return this.getProducts(seachURL);
   }
+//Get pagination products
+  getProductListPagination(page:number, size:number, categoryId: number): Observable<Product[]>{
+
+    // const seachURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}`;
+    const paginationURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${size}`; 
+
+    return this.getProducts(paginationURL);
+  }
 
   searchProduct(keywordSearched: string): Observable<Product[]> {
     const searchByNameURL: string = `${this.productURl}/search/findByNameContaining?name=${keywordSearched}`
@@ -49,6 +57,12 @@ export class ProductService {
 interface GetResponseProduct{
   _embedded: {
     products: Product[];
+  },
+  page : {
+    size : number,
+    totalElements : number,
+    totalPages : number,
+    number : number
   }
 }
 

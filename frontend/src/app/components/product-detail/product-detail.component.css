@@ -3,7 +3,15 @@ h4{
 }
 
 input[type=number]{
-    width: 10px;
+    box-sizing: border-box;
+    width: 80px;
     border-width: 2px;
     border-color: black;
+    /* margin: 0 100px ; */
 }
+input[type=number]:focus{
+    /* outline-color: none !important; */
+    box-shadow: none;
+    /* margin: 0 100px ; */
+}
+
