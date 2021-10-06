@@ -10,9 +10,14 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class ProductsPageComponent implements OnInit {
 
-  productList!: Product[];
+  productList: Product[] = [];
   currentCatagoryId?: number;
+  priviousCatagoryId?: number;
   searchMode: boolean = false;
+
+  paginationPageNumber: number = 1;
+  paginationPageSize: number = 10;
+  paginationTotalElements: number = 1;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -46,9 +51,30 @@ export class ProductsPageComponent implements OnInit {
     }else{
       this.currentCatagoryId = 1;
     }
-    this.productService.getProductList(this.currentCatagoryId).subscribe(
-      data=> {this.productList = data}
-    )
+//Check if user has changed to a new category or not
+    if(this.priviousCatagoryId != this.currentCatagoryId){
+      this.paginationPageNumber = 1;
+    }
+    this.priviousCatagoryId = this.currentCatagoryId;
+    // console.log(`current category id ${this.currentCatagoryId} and privoius category id ${this.priviousCatagoryId}`);
+    // console.log(`pagination number ${this.paginationPageNumber}`);
+    
+
+    this.productService.getProductListPagination(--this.paginationPageNumber, this.paginationPageSize, this.currentCatagoryId)
+      .subscribe(data=>this.handelPaginationData(data));
+  }
+
+
+  handelPaginationData(data: any): void {
+    this.productList = data._embedded.products;
+    //Spring counts page number from zero where as angular starts from one.
+    this.paginationPageNumber = data.page.number + 1;
+    this.paginationPageSize = data.page.size;
+    this.paginationTotalElements = data.page.totalElements;
+  }
+
+  showPagination(): boolean{
+    return this.paginationTotalElements >= 10;
   }
 
 }

@@ -22,12 +22,12 @@ export class ProductService {
     return this.getProducts(seachURL);
   }
 //Get pagination products
-  getProductListPagination(page:number, size:number, categoryId: number): Observable<Product[]>{
+  getProductListPagination(page:number, size:number, categoryId: number): Observable<GetResponseProduct>{
 
     // const seachURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}`;
     const paginationURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${size}`; 
 
-    return this.getProducts(paginationURL);
+    return this.httpClient.get<GetResponseProduct>(paginationURL);
   }
 
   searchProduct(keywordSearched: string): Observable<Product[]> {

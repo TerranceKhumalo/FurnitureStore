@@ -44,6 +44,16 @@
           search keyword for any mistakes.
         </p>
       </div>
+
+      <div *ngIf="showPagination()">
+        <ngb-pagination
+        class="d-flex justify-content-center"
+  [(page)]="paginationPageNumber"
+  [pageSize]="paginationPageSize"
+  [collectionSize]="paginationTotalElements"
+  (pageChange)="listProducts()"
+  ></ngb-pagination>
+      </div>
     </div>
   </div>
 </div>
