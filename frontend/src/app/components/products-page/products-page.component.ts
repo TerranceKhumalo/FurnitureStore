@@ -77,4 +77,9 @@ export class ProductsPageComponent implements OnInit {
     return this.paginationTotalElements >= 10;
   }
 
+  addToCart(product: Product){
+    console.log(`${product.name} and price: ${product.unitPrice}`);
+    
+  }
+
 }
