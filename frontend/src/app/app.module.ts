@@ -20,6 +20,7 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 import { Router } from '@angular/router';
 import myAppConfig from './config/my-app-config';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { CartPageComponent } from './components/cart-page/cart-page.component';
 
 const oktaConfig = Object.assign({
   onAuthRequired: (inject: any)=>{
@@ -40,7 +41,8 @@ const oktaConfig = Object.assign({
     ProductCategoryMenuComponent,
     SearchComponent,
     LoginStatusComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule,
