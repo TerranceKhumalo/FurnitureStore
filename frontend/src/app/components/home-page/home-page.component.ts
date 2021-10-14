@@ -8,6 +8,8 @@ import { HomeDataService } from 'src/app/services/homepage/home-data.service';
 })
 export class HomePageComponent implements OnInit {
 
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+
 homeMessage: string = '';
 
   constructor(private homeService: HomeDataService) { }

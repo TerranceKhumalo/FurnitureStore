@@ -1,0 +1,7 @@
+.bg{
+    height: 50%; 
+    background-image: url("/assets/images/404page.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

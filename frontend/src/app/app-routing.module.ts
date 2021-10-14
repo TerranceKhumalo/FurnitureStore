@@ -19,7 +19,8 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
+  // {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
+  {path: 'home', component: HomePageComponent},
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
   {path: 'shop', component: ProductsPageComponent},
   {path: 'cart', component: CartPageComponent},
