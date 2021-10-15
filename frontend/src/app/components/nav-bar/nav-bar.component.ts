@@ -29,7 +29,11 @@ export class NavBarComponent implements OnInit {
   getUserDetails() {
     if (this.isAuthenticated) {
       this.oktaAuthService.getUser().then(
-        res=>{this.userFullName = res.name, this.userName = this.userFullName?.split(' ')[0]}
+        res=>{
+          this.userFullName = res.name, this.userName = this.userFullName?.split(' ')[0];
+          console.log(res);
+          
+        }
       )
     }
   }

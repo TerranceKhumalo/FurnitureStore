@@ -47,26 +47,4 @@ export class LoginPageComponent implements OnInit {
       );
   }
 
-  // onSubmit() {
-  //   // TODO: Use EventEmitter with form value
-  //   let user = this.loginForm.value.userEmail;
-  //   let pass = this.loginForm.value.userPassword;
-    
-  //   this.loginUser(user, pass);
-  // }
-
-  // loginUser(username: string, password: string){
-  //   this.basicAuth.executeBasicAuth(username, password).subscribe(
-  //     res=>{
-  //       console.log("User loged in", res);
-  //       this.router.navigate(['']);
-  //       this.inValidLogin = false;
-  //     },
-  //     err=>{
-  //       console.log("There was an error!");
-  //       this.inValidLogin = true;
-  //     }
-  //   );
-  // }
-
 }

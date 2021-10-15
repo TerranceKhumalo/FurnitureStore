@@ -2,6 +2,7 @@ package com.khumaloterrance.furniture.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,6 +14,8 @@ import java.util.Date;
 @Table(name = "product")
 @Getter
 @Setter
+//For testing delete afterwards
+@ToString
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,5 +53,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
+
+    @ManyToOne(cascade = CascadeType.ALL )
+    private ShoppingCart cart;
 
 }
