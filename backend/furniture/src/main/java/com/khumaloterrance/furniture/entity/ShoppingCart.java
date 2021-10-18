@@ -20,11 +20,9 @@ public class ShoppingCart {
 
     private int productQuantity;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_ID")
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Product>products;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_ID")
     private Customer customer;
 }

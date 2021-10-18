@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -54,7 +55,7 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
 
-    @ManyToOne(cascade = CascadeType.ALL )
-    private ShoppingCart cart;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
+    private Set<ShoppingCart> cart;
 
 }
