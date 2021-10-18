@@ -9,23 +9,23 @@ import { ProductCategory } from 'src/app/common/product-category';
   providedIn: 'root'
 })
 export class ProductService {
-  
+
   private productURl = 'http://localhost:8080/api/products';
   private categoryURL = 'http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) { }
 
-  getProductList(categoryId: number): Observable<Product[]>{
+  getProductList(categoryId: number): Observable<Product[]> {
 
-    const seachURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}`    
+    const seachURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}`
 
     return this.getProducts(seachURL);
   }
-//Get pagination products
-  getProductListPagination(page:number, size:number, categoryId: number): Observable<GetResponseProduct>{
+  //Get pagination products
+  getProductListPagination(page: number, size: number, categoryId: number): Observable<GetResponseProduct> {
 
     // const seachURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}`;
-    const paginationURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${size}`; 
+    const paginationURL = `${this.productURl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${size}`;
 
     return this.httpClient.get<GetResponseProduct>(paginationURL);
   }
@@ -36,37 +36,37 @@ export class ProductService {
     return this.getProducts(searchByNameURL);
   }
 
-  private getProducts(searchURL: string):Observable<Product[]>{
+  private getProducts(searchURL: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProduct>(searchURL).pipe(
-      map(response=> response._embedded.products)
+      map(response => response._embedded.products)
     );
   }
 
-  getProductCategoryList(): Observable<ProductCategory[]>{
+  getProductCategoryList(): Observable<ProductCategory[]> {
 
     return this.httpClient.get<GetResponseProductCategory>(this.categoryURL).pipe(
-      map(respose=> respose._embedded.productCategory)
+      map(respose => respose._embedded.productCategory)
     );
   }
 
-  getProduct(productId: number): Observable<Product>{
+  getProduct(productId: number): Observable<Product> {
     return this.httpClient.get<Product>(`${this.productURl}/${productId}`);
   }
-  
+
 }
-interface GetResponseProduct{
+interface GetResponseProduct {
   _embedded: {
     products: Product[];
   },
-  page : {
-    size : number,
-    totalElements : number,
-    totalPages : number,
-    number : number
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    number: number
   }
 }
 
-interface GetResponseProductCategory{
+interface GetResponseProductCategory {
   _embedded: {
     productCategory: ProductCategory[];
   }
