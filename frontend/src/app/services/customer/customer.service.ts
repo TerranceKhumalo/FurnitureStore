@@ -14,8 +14,8 @@ export class CustomerService {
   //TODO: Check if customer exist in the database if not add customer to datbase then return true.
 
   checkCustomerInDatabase(email: string){
-    const findCustomerURL:string = `${this.productURL}/search/findByEmail?email=${email}`;
-
+    const findCustomerURL: string = `${this.productURL}/search/findByEmail?email=${email}`;
+    
     return this.httpClient.get<Customer>(findCustomerURL);
   }
 

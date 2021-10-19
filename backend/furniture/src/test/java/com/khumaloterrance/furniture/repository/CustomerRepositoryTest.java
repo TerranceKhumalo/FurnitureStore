@@ -1,12 +1,47 @@
 package com.khumaloterrance.furniture.repository;
 
 import com.khumaloterrance.furniture.entity.Customer;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@CrossOrigin("http://localhost:4200")
-public interface CustomerRepositoryTest extends JpaRepository<Customer, Long> {
+import javax.transaction.Transactional;
 
-    Customer findByEmail(@RequestParam("email") String email);
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+public class CustomerRepositoryTest {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    CustomerRepository customerRepository;
+
+    @Test
+    @Transactional
+    public void findByEmailTest(){
+        Customer customer = customerRepository.findByEmail("khumaloterrance@gmail.com");
+        assertNotNull(customer);
+    }
+
+    @Test
+    @Transactional
+    public void findByEmailCustomerNameTest(){
+       Customer customer = customerRepository.findByEmail("khumaloterrance@gmail.com");
+       assertEquals("Timmy", customer.getName());
+    }
+
+    @Test
+    @Transactional
+    public void findByEmailFailTest(){
+        Customer customer = customerRepository.findByEmail("khumaloterrance1@gmail.com");
+        assertNull(customer);
+//        logger.debug("This is an empty {}", customer);
+    }
+
 }
