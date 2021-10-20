@@ -30,8 +30,13 @@ export class CustomerService {
     return this.httpClient.get<Customer>(findCustomerURL);
   }
 
-  addCustomerToDatabase(customer: Customer){
-
+  saveCustomerToDatabase(name: string, surname: string, email: string){
+   const customerToSaved = {
+      name,
+      surname,
+      email
+    }
+    return this.httpClient.post<Customer>(this.productURL, customerToSaved);
   }
 
   setCustomerDetails(customer: Customer){

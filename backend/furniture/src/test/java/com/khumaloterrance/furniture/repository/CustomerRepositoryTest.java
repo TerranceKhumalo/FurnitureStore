@@ -1,6 +1,7 @@
 package com.khumaloterrance.furniture.repository;
 
 import com.khumaloterrance.furniture.entity.Customer;
+import com.khumaloterrance.furniture.entity.ShoppingCart;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

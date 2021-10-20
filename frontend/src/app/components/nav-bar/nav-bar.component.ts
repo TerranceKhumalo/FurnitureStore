@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
+import { UserClaims } from '@okta/okta-auth-js';
 import { Customer } from 'src/app/common/customer';
 import { BasicAuthService } from 'src/app/services/basic-auth.service';
 import { CustomerService } from 'src/app/services/customer/customer.service';
@@ -20,7 +21,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.oktaAuthService.$authenticationState.subscribe(
-      (result)=>{
+      (result) => {
         this.isAuthenticated = result
         this.getUserDetails();
       }
@@ -31,20 +32,38 @@ export class NavBarComponent implements OnInit {
   getUserDetails() {
     if (this.isAuthenticated) {
       this.oktaAuthService.getUser().then(
-        res=>{
+        res => {
           //Check if user in OKTA exists in local database.
-          this.customerService.checkCustomerInDatabase("khumaloterrance@gmail.com").subscribe(
-            customerResponseData=>{
-              //Assign Okta customer to local service.
-              this.customerService.setCustomerDetails({...customerResponseData});
-              console.log(this.customerService.getCustomerDetails().name+" that's my name.");
+          this.customerService.checkCustomerInDatabase(res.email).subscribe(
+            customerResponseData => {
+              //Assign Okta customer to local service Customer service.
+              this.assignCustomerToServiceCustomer({...customerResponseData})
             },
-            err=>{
-              
+            //When User is not found in local database save user to database
+            errNoCustomer => {
+              console.log("User does not exist in database creating user..." + errNoCustomer);
+              this.handleSaveCustomerToDatabse(res);
             }
-          ); 
+          );
         }
       )
+    }
+  }
+
+  assignCustomerToServiceCustomer(customerData: Customer) {
+    this.customerService.setCustomerDetails({ ...customerData })
+    this.userName = this.customerService.getCustomerDetails().name;
+    console.log(customerData);
+  }
+
+  handleSaveCustomerToDatabse(customerDetails: UserClaims){
+    //Validate that details are not undefined.
+    if (customerDetails.given_name && customerDetails.family_name && customerDetails.email) {
+      this.customerService.saveCustomerToDatabase(customerDetails.given_name, customerDetails.family_name, customerDetails.email).subscribe(
+        saveResponse => {
+          this.assignCustomerToServiceCustomer({...saveResponse});
+        }
+      );
     }
   }
 
