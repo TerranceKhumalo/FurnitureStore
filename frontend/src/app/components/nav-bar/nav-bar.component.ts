@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
+import { Customer } from 'src/app/common/customer';
 import { BasicAuthService } from 'src/app/services/basic-auth.service';
+import { CustomerService } from 'src/app/services/customer/customer.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,10 +13,10 @@ import { BasicAuthService } from 'src/app/services/basic-auth.service';
 export class NavBarComponent implements OnInit {
 
   public isAuthenticated: boolean = false;
-  public userFullName: string | undefined;
+  public customerDetails: Customer | undefined;
   public userName: string | undefined;
 
-  constructor(private oktaAuthService: OktaAuthService, private router: Router) { }
+  constructor(private oktaAuthService: OktaAuthService, private router: Router, private customerService: CustomerService) { }
 
   ngOnInit(): void {
     this.oktaAuthService.$authenticationState.subscribe(
@@ -30,9 +32,17 @@ export class NavBarComponent implements OnInit {
     if (this.isAuthenticated) {
       this.oktaAuthService.getUser().then(
         res=>{
-          this.userFullName = res.name, this.userName = this.userFullName?.split(' ')[0];
-          console.log(res);
-          
+          //Check if user in OKTA exists in local database.
+          this.customerService.checkCustomerInDatabase("khumaloterrance@gmail.com").subscribe(
+            customerResponseData=>{
+              //Assign Okta customer to local service.
+              this.customerService.setCustomerDetails({...customerResponseData});
+              console.log(this.customerService.getCustomerDetails().name+" that's my name.");
+            },
+            err=>{
+              
+            }
+          ); 
         }
       )
     }

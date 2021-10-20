@@ -1,11 +1,16 @@
 package com.khumaloterrance.furniture.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 
 @Table(name = "customer_address")
 @Entity
+
+@Setter
+@Getter
 //For testing delete afterwards
 @ToString
 public class CustomerAddress {

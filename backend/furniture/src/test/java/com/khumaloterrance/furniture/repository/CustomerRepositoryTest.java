@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,6 +42,19 @@ public class CustomerRepositoryTest {
     public void findByEmailFailTest(){
         Customer customer = customerRepository.findByEmail("khumaloterrance1@gmail.com");
         assertNull(customer);
+//        logger.debug("This is an empty {}", customer);
+    }
+
+    @Test
+    @Transactional
+    @DirtiesContext
+    public void saveCustomerTest(){
+        Customer customer1 = new Customer();
+        customer1.setName("Terrance");
+        customer1.setEmail("khumaloterrance1@gmail.com");
+        customer1.setSurname("khumalo");
+        Customer customer = customerRepository.save(customer1);
+        assertNotNull(customer);
 //        logger.debug("This is an empty {}", customer);
     }
 
