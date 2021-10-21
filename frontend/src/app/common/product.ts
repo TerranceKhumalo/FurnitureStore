@@ -1,3 +1,5 @@
+import { ShoppingCart } from "./shoppingCart";
+
 export class Product {
     id: number | undefined;
     sku: string | undefined;
@@ -9,4 +11,5 @@ export class Product {
     unitsInStock: number | undefined;
     dateCreated: Date | undefined;
     lastUpdated: Date | undefined;
+    // cart: ShoppingCart | undefined;
 }

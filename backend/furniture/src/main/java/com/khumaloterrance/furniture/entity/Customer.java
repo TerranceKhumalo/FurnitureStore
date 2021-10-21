@@ -24,9 +24,10 @@ public class Customer {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_ID")
+    @JoinColumn(name = "address_id")
     private CustomerAddress address;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
     private ShoppingCart shoppingCart;
 }

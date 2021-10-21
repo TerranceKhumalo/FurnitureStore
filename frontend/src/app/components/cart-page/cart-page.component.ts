@@ -14,18 +14,18 @@ export class CartPageComponent implements OnInit {
   constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
-    this.doesCustomerExists();
+    // this.doesCustomerExists();
   }
 
-  doesCustomerExists(){
-    this.customerService.checkCustomerInDatabase('khumaloterrance@gmail.com').subscribe(
-      data=>{
-        this.customerData = data;
-        if(this.customerData){console.log(true);}
-        console.log(this.customerData);
-      },
-      err=>console.log('could not find customer '+ err)
-    );
-  }
+  // doesCustomerExists(){
+  //   this.customerService.checkCustomerInDatabase('khumaloterrance@gmail.com').subscribe(
+  //     data=>{
+  //       this.customerData = data;
+  //       if(this.customerData){console.log(true);}
+  //       console.log(this.customerData);
+  //     },
+  //     err=>console.log('could not find customer '+ err)
+  //   );
+  // }
 
 }

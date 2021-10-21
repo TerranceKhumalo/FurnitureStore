@@ -12,12 +12,13 @@ export class CustomerService {
     name: 'Dummy Name',
     surname: 'Dummy Surname',
     email: 'dummy@gmail.com',
-    address:{
+    address: {
       streetName: 'dummy street',
       city: 'dummy city',
       country: 'dummy country',
-      zipCode: 1230
-    } 
+      zipCode: 0o00
+    },
+    shoppingCart: undefined
   };
 
   constructor(private httpClient: HttpClient) { }
@@ -34,9 +35,15 @@ export class CustomerService {
    const customerToSaved = {
       name,
       surname,
-      email
+      email,
+      address: {},
+      shoppingCart: {}
     }
     return this.httpClient.post<Customer>(this.productURL, customerToSaved);
+  }
+
+  updateCustomerDetails(currentCustomer: Customer){
+    return this.httpClient.post<Customer>(this.productURL, currentCustomer);
   }
 
   setCustomerDetails(customer: Customer){
@@ -47,6 +54,6 @@ export class CustomerService {
     return this.customerDetails;
   }
 
-  //TODO: create method that returns true or false depanding if customer is in the databse table.
+  
 }
 
