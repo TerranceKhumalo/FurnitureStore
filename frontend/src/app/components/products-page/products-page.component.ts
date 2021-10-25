@@ -78,7 +78,7 @@ export class ProductsPageComponent implements OnInit {
   showPagination(): boolean{
     return this.paginationTotalElements >= 10;
   }
-
+//Add product to customer cart.
   addToCart(product: Product){
     this.cartService.saveToCart(product, this.customerService.getCustomerDetails());
     console.log(`${product.name} and price: ${product.unitPrice}`);

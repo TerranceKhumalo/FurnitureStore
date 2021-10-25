@@ -50,11 +50,7 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  assignCustomerToServiceCustomer(customerData: Customer) {
-    this.customerService.setCustomerDetails({ ...customerData })
-    this.userName = this.customerService.getCustomerDetails().name;
-    console.log(customerData);
-  }
+  
 
   handleSaveCustomerToDatabse(customerDetails: UserClaims){
     //Validate that details are not undefined.
@@ -65,6 +61,13 @@ export class NavBarComponent implements OnInit {
         }
       );
     }
+  }
+
+  //Assign customer details to local varibale in customer service.
+  assignCustomerToServiceCustomer(customerData: Customer) {
+    this.customerService.setCustomerDetails({ ...customerData })
+    this.userName = this.customerService.getCustomerDetails().name;
+    console.log(customerData);
   }
 
   //version 2 logout

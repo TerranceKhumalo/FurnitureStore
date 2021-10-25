@@ -58,5 +58,13 @@ public class CustomerRepositoryTest {
         assertNotNull(customer);
 //        logger.debug("This is an empty {}", customer);
     }
+    @Test
+    @Transactional
+    @DirtiesContext
+    public void saveCustomerShoppingCartTest(){
+        Customer customer1 = customerRepository.findByEmail("khumaloterrance1@gmail.com");
+        assertNotNull(customer1.getAddress());
+//        logger.debug("This is an empty {}", customer);
+    }
 
 }

@@ -39,7 +39,7 @@ export class CustomerService {
       address: {},
       shoppingCart: {}
     }
-    return this.httpClient.post<Customer>(this.productURL, customerToSaved);
+    return this.httpClient.post<Customer>(`${this.productURL}/save`, customerToSaved);
   }
 
   updateCustomerDetails(currentCustomer: Customer){
