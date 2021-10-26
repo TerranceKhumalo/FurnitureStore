@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Customer } from 'src/app/common/customer';
+import { Product } from 'src/app/common/product';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,6 @@ export class CustomerService {
   constructor(private httpClient: HttpClient) { }
 
   //TODO: Check if customer exist in the database if not add customer to datbase then return true.
-
   checkCustomerInDatabase(email?: string){
     const findCustomerURL: string = `${this.productURL}/search/findByEmail?email=${email}`;
     
@@ -40,6 +40,11 @@ export class CustomerService {
       shoppingCart: {}
     }
     return this.httpClient.post<Customer>(`${this.productURL}/save`, customerToSaved);
+  }
+
+  //When user saves to cart.
+  customerSaveToCart(email: string, product: Product){
+    return this.httpClient.post<Customer>(`${this.productURL}/${email}/cart`, product);
   }
 
   updateCustomerDetails(currentCustomer: Customer){

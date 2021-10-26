@@ -11,18 +11,36 @@ export class CartService {
   constructor(private customerService: CustomerService) { }
 
   saveToCart(product: Product, currentCustomer: Customer){
-    let numberOfProducts =  currentCustomer.shoppingCart?.products?.push(product);
-    if(numberOfProducts){
-      currentCustomer.shoppingCart?.setProductQuantity(numberOfProducts);
-    }
-    this.customerService.updateCustomerDetails(currentCustomer).subscribe(
-      res=>{
-        console.log("added to cart");
+    
+    this.customerService.checkCustomerInDatabase(currentCustomer.email).subscribe(
+      response =>{
+        this.saveProductsToDatabase(currentCustomer.email!, product);
       },
       err=>{
-        console.log("Could not save custmoer to the database.");
+        console.log('You are not logged in!');
+        
+      }
+    );
+    
+  }
+  
+
+
+
+  saveProductsToDatabase(email: string, product: Product) {
+    this.customerService.customerSaveToCart(email, product).subscribe(
+      res=>{
+        console.log('Saved to database.');
+        
+        console.log(res);
+      },
+      err=>{
+        console.log('Something went wrong ', err);
+        
       }
     );
   }
-  
 }
+
+
+

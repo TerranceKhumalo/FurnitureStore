@@ -11,8 +11,6 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 //For testing delete afterwards
 @ToString
 public class ShoppingCart {
@@ -21,9 +19,10 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JoinTable(name = "shopping_cart_products")
     private int productQuantity;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     private Set<Product>products;
 
     @Column(name = "date_created")
@@ -36,4 +35,63 @@ public class ShoppingCart {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
     private Customer customer;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity() {
+        this.productQuantity += 1;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void addProducts(Product product) {
+        if(getProducts().contains(product)){
+            setProductQuantity();
+            return;
+        }
+        products.add(product);
+    }
+
+    public void removeProduct(Product product){
+        if(getProducts().contains(product)){
+            products.remove(product);
+        }
+        return;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
