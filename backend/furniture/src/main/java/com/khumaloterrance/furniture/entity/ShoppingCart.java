@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,11 +20,8 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinTable(name = "shopping_cart_products")
-    private int productQuantity;
-
-    @ManyToMany(cascade = CascadeType.MERGE)
-    private Set<Product>products;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
+    private Set<ItemsToPurchase> itemsToPurchase;
 
     @Column(name = "date_created")
     @CreationTimestamp
@@ -36,6 +34,7 @@ public class ShoppingCart {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
     private Customer customer;
 
+
     public Long getId() {
         return id;
     }
@@ -44,29 +43,20 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public int getProductQuantity() {
-        return productQuantity;
+    public Set<ItemsToPurchase> getItemsToPurchase() {
+        return itemsToPurchase;
     }
 
-    public void setProductQuantity() {
-        this.productQuantity += 1;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void addProducts(Product product) {
-        if(getProducts().contains(product)){
-            setProductQuantity();
+    public void addItemsToPurchase(ItemsToPurchase item) {
+        if(getItemsToPurchase().contains(item)){
             return;
         }
-        products.add(product);
+        this.itemsToPurchase.add(item);
     }
 
-    public void removeProduct(Product product){
-        if(getProducts().contains(product)){
-            products.remove(product);
+    public void removeItemsToPurchase(ItemsToPurchase item){
+        if(getItemsToPurchase().contains(item)){
+            this.itemsToPurchase.remove(item);
         }
         return;
     }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
-import java.util.Set;
 
 @RepositoryRestController
 public class CustomerController {
@@ -36,16 +35,16 @@ public class CustomerController {
         return ResponseEntity.ok(customer);
     }
 
-    @PostMapping("/customers/{email}/cart")
-    @Transactional
-    public Customer saveToCart(@PathVariable String email, @RequestBody Product productsInCart){
-        Customer customerAddToCart = repository.findByEmail(email);
-        if(customerAddToCart != null){
-            customerAddToCart.getShoppingCart().getProducts().add(productsInCart);
+//    @PostMapping("/customers/{email}/cart")
+//    @Transactional
+//    public Customer saveToCart(@PathVariable String email, @RequestBody Product productsInCart){
+//        Customer customerAddToCart = repository.findByEmail(email);
+//        if(customerAddToCart != null){
+//            customerAddToCart.getShoppingCart().;
 //            this.repository.save(customerAddToCart);
-
-        }
-
-        return customerAddToCart;
-    }
+//
+//        }
+//
+//        return customerAddToCart;
+//    }
 }

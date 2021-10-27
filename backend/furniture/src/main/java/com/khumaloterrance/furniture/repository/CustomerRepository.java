@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.transaction.Transactional;
 
 @CrossOrigin("http://localhost:4200")
-@Transactional
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
     Customer findByEmail(@RequestParam("email") String email);
