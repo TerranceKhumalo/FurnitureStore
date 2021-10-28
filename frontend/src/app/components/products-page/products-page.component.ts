@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/common/cartItem';
 import { Product } from 'src/app/common/product';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CustomerService } from 'src/app/services/customer/customer.service';
@@ -20,6 +21,9 @@ export class ProductsPageComponent implements OnInit {
   paginationPageNumber: number = 1;
   paginationPageSize: number = 10;
   paginationTotalElements: number = 1;
+
+  totalQuantityItems: number = 0;
+  totalItemPrice: number = 0;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private cartService: CartService, private customerService: CustomerService) { }
 
@@ -80,8 +84,11 @@ export class ProductsPageComponent implements OnInit {
   }
 //Add product to customer cart.
   addToCart(product: Product){
-    this.cartService.saveToCart(product, this.customerService.getCustomerDetails());
+    //TODO:Work on saving to database.
+    // this.cartService.saveToCart(product, this.customerService.getCustomerDetails());
     console.log(`${product.name} and price: ${product.unitPrice}`);
+    const cartItem = new CartItem(product);
+    this.cartService.saveToCart(cartItem);
     
   }
 

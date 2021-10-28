@@ -25,19 +25,19 @@ public class AppDataRestConfig implements RepositoryRestConfigurer {
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
 
-        HttpMethod [] unspportedActions = {HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH};
+        HttpMethod [] unsupportedActions = {HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH};
 
         //disable Http method: PUT, POST and DELETE for PRODUCTS
         config.getExposureConfiguration()
                 .forDomainType(Product.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unspportedActions))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unspportedActions));
+                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
+                .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
 
         //disable Http method: PUT, POST and DELETE for PRODUCTS CATEGORY
         config.getExposureConfiguration()
                 .forDomainType(ProductCategory.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unspportedActions))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unspportedActions));
+                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
+                .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
 
         exposeIds(config);
     }

@@ -21,7 +21,6 @@ public class ItemsToPurchase {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "product_quantity")
     private int quantity;
 
     public Long getId() {

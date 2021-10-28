@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class ShoppingCart {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
-    private Set<ItemsToPurchase> itemsToPurchase;
+    private Set<ItemsToPurchase> itemsToPurchase = new HashSet<ItemsToPurchase>();
 
     @Column(name = "date_created")
     @CreationTimestamp
