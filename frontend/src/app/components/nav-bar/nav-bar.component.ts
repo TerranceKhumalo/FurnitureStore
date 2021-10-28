@@ -4,6 +4,7 @@ import { OktaAuthService } from '@okta/okta-angular';
 import { UserClaims } from '@okta/okta-auth-js';
 import { Customer } from 'src/app/common/customer';
 import { BasicAuthService } from 'src/app/services/basic-auth.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { CustomerService } from 'src/app/services/customer/customer.service';
 
 @Component({
@@ -17,7 +18,10 @@ export class NavBarComponent implements OnInit {
   public customerDetails: Customer | undefined;
   public userName: string | undefined;
 
-  constructor(private oktaAuthService: OktaAuthService, private router: Router, private customerService: CustomerService) { }
+  totalQuantityItems: number = 0;
+  totalItemPrice: number = 0;
+
+  constructor(private oktaAuthService: OktaAuthService, private router: Router, private customerService: CustomerService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.oktaAuthService.$authenticationState.subscribe(
@@ -26,6 +30,18 @@ export class NavBarComponent implements OnInit {
         this.getUserDetails();
       }
     );
+
+    this.updateCartStatus();
+  }
+
+   //Update total cost and Quantity of items.
+   updateCartStatus(){
+    this.cartService.totalPrice.subscribe(
+      data => this.totalItemPrice = data
+    );
+    this.cartService.totalQuntity.subscribe(
+      data => this.totalQuantityItems = data
+    )
   }
 
   //Version 2

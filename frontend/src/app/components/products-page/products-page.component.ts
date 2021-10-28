@@ -22,16 +22,16 @@ export class ProductsPageComponent implements OnInit {
   paginationPageSize: number = 10;
   paginationTotalElements: number = 1;
 
-  totalQuantityItems: number = 0;
-  totalItemPrice: number = 0;
-
-  constructor(private productService: ProductService, private route: ActivatedRoute, private cartService: CartService, private customerService: CustomerService) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(()=>{
       this.listProducts();
     });
+
+  
   }
+ 
 
   listProducts(){
     this.searchMode = this.route.snapshot.paramMap.has('keyword');

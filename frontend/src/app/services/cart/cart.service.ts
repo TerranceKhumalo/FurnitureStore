@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CartItem } from 'src/app/common/cartItem';
 import { Product } from 'src/app/common/product';
 import { CustomerService } from '../customer/customer.service';
@@ -53,11 +53,7 @@ export class CartService {
     let existingCartItem: CartItem | undefined;
 //Check if cart has items.
     if (this.cartItems.length > 0) {
-      for(let tempCartItem of this.cartItems){
-        if (tempCartItem.id === customerCartItem.id) {
-          existingCartItem = tempCartItem;
-        }
-      }
+      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === customerCartItem.id);
     }
 
     alreadyExistInCart = (existingCartItem != undefined);
@@ -87,7 +83,7 @@ export class CartService {
     console.log("Total price and quantity value:");
     for (const item of this.cartItems) {
       const subTotal = item.quantity * item.unitPrice!;
-      console.log(`Name ${item.name} , quantity: ${item.quantity} and price: ${item.unitPrice} Total cost: ${subTotal}`);
+      console.log(`Name ${item.name} , quantity: ${item.quantity} and price: ${item.unitPrice} Total cost: ${subTotal.toFixed(2)}`);
     }
     console.log(`Total Price Value: ${totalPriceValue.toFixed(2)} and Total Quantity Value: ${totalQuantityValue}`);
   }
