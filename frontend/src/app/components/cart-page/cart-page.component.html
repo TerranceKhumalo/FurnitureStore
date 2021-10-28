@@ -13,49 +13,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let item of itemsInCart">
                         <td>
 
                             <p class="fw-bold"><img class="img-fluid"
                                     src="../assets/images/products/coffee table/COFFEE-TABLE-4000.jpg"
                                     alt="Product image" width="150">
-                                Coffee Table</p>
+                                {{item.name}}</p>
 
                         </td>
                         <td>
                             <div class="mt-5">
-                                <button class="btn btn-light"><i class="bi bi-dash"></i></button> 1 <button
+                                <button class="btn btn-light"><i class="bi bi-dash"></i></button> {{item.quantity}} <button
                                     class="btn btn-light"><i class="bi bi-plus"></i>
                                 </button>
                             </div>
                         </td>
                         <td>
-                            <p class="mt-5 fw-bold">$34,45</p>
-                        </td>
-                        <td>
-                            <div class="mt-5">
-                                <button class="btn btn-light"><i class="bi bi-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-
-                            <p class="fw-bold"><img class="img-fluid"
-                                    src="../assets/images/products/coffee table/COFFEE-TABLE-4000.jpg"
-                                    alt="Product image" width="150">
-                                Coffee Table</p>
-
-                        </td>
-                        <td>
-                            <div class="mt-5">
-                                <button class="btn btn-light"><i class="bi bi-dash"></i></button> 1 <button
-                                    class="btn btn-light"><i class="bi bi-plus"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mt-5 fw-bold">$34,45</p>
+                            <p class="mt-5 fw-bold">{{calculateItemQuantityTotal(item) | currency: 'USD'}}</p>
                         </td>
                         <td>
                             <div class="mt-5">
@@ -77,7 +52,7 @@
                             <p class="card-text text-muted">Shipping</p>
                         </div>
                         <div class="col text-end fw-bold">
-                            <p>$98.4</p>
+                            <p>{{subTotal}}</p>
                             <p>Free</p>
                         </div>
                     </div>
