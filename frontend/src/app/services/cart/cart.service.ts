@@ -46,7 +46,7 @@ export class CartService {
 //     }
 //     this.addCartTotal();
 //   }  
-  //Version 2 of save to cart
+  //Save items to cart if exist increment quantity.
   saveToCart(customerCartItem: CartItem){
     
     let alreadyExistInCart: boolean = false;
@@ -64,6 +64,25 @@ export class CartService {
     }
     this.addCartTotal();
   }
+  removeItemInCart(cartItem: CartItem){
+    const removeItemIndex = this.cartItems.indexOf(cartItem);
+    if (removeItemIndex != -1) {
+      this.cartItems.splice(removeItemIndex, 1);
+    }
+    
+  }
+
+  decrementItemQuantity(cartItem: CartItem){
+
+    cartItem.quantity --;
+    
+    if(cartItem.quantity == 0){
+      this.removeItemInCart(cartItem);
+    }
+    this.addCartTotal();
+
+  }
+
   addCartTotal() {
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;

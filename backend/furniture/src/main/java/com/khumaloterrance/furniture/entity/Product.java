@@ -16,6 +16,8 @@ import java.util.Set;
 @Table(name = "product")
 //For testing delete afterwards
 @ToString
+@Setter
+@Getter
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,8 +56,10 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private Set<ItemsToPurchase> itemsToPurchase = new HashSet<ItemsToPurchase>();
+//    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "product")
+//    private Set<ItemsToPurchase> itemsToPurchase = new HashSet<ItemsToPurchase>();
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
+    private Set<ShoppingCart>shoppingCarts;
 
     public Long getId() {
         return id;
@@ -144,22 +148,22 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
-
-    public Set<ItemsToPurchase> getItemsToPurchase() {
-        return itemsToPurchase;
-    }
-
-    public void addItemsToPurchase(ItemsToPurchase item) {
-        if(getItemsToPurchase().contains(item)){
-            return;
-        }
-        this.itemsToPurchase.add(item);
-    }
-
-    public void removeItemsToPurchase(ItemsToPurchase item){
-        if(getItemsToPurchase().contains(item)){
-            this.itemsToPurchase.remove(item);
-        }
-        return;
-    }
+//TODO: fix many to many items to purchase database table
+//    public Set<ItemsToPurchase> getItemsToPurchase() {
+//        return itemsToPurchase;
+//    }
+//
+//    public void addItemsToPurchase(ItemsToPurchase item) {
+//        if(getItemsToPurchase().contains(item)){
+//            return;
+//        }
+//        this.itemsToPurchase.add(item);
+//    }
+//
+//    public void removeItemsToPurchase(ItemsToPurchase item){
+//        if(getItemsToPurchase().contains(item)){
+//            this.itemsToPurchase.remove(item);
+//        }
+//        return;
+//    }
 }

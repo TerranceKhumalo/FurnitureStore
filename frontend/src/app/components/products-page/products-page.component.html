@@ -25,7 +25,8 @@
                 <h5 class="card-title">
                   {{ product.unitPrice | currency: "USD" }}
                 </h5>
-                <button (click)="addToCart(product)" routerLink="/products/{{product.id}}" routerLinkActive="router-link-active" class="btn btn-success btn-color">Add to Cart</button>
+                <button title="Add to cart" (click)="addToCart(product)" class="btn btn-outline-success"><i class="bi bi-cart2"></i></button>
+                <button routerLink="/products/{{product.id}}" routerLinkActive="router-link-active" class="btn btn-outline-success ms-2" title="View Product"><i class="bi bi-eye"></i></button>
               </div>
             </div>
           </div>

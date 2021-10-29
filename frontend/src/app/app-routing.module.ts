@@ -9,6 +9,7 @@ import { RegistrationPageComponent } from './components/registration-page/regist
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 // const oktaConfig = Object.assign({
 //   onAuthRequired: (inject: { get: (arg0: typeof Router) => any; })=>{
@@ -19,17 +20,17 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
 
 
 const routes: Routes = [
-  // {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
-  {path: 'home', component: HomePageComponent},
+  {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
   {path: 'shop', component: ProductsPageComponent},
-  {path: 'cart', component: CartPageComponent},
+  {path: 'cart', component: CartPageComponent, canActivate: [OktaAuthGuard]},
   {path: 'products/:id', component: ProductDetailComponent},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'category/:id', component: ProductsPageComponent},
   {path: 'search/:keyword', component: ProductsPageComponent},
   {path: 'register', component: RegistrationPageComponent},
+  {path: 'checkout', component: CheckoutComponent},
   {path: '**', component: ErrorPageComponent}
   
 ];

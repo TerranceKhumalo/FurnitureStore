@@ -22,6 +22,7 @@ import myAppConfig from './config/my-app-config';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const oktaConfig = Object.assign({
   onAuthRequired: (inject: any)=>{
@@ -44,7 +45,8 @@ const oktaConfig = Object.assign({
     LoginStatusComponent,
     ProductDetailComponent,
     CartPageComponent,
-    FooterComponent
+    FooterComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

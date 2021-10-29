@@ -35,16 +35,16 @@ public class CustomerController {
         return ResponseEntity.ok(customer);
     }
 
-//    @PostMapping("/customers/{email}/cart")
-//    @Transactional
-//    public Customer saveToCart(@PathVariable String email, @RequestBody Product productsInCart){
-//        Customer customerAddToCart = repository.findByEmail(email);
-//        if(customerAddToCart != null){
-//            customerAddToCart.getShoppingCart().;
-//            this.repository.save(customerAddToCart);
-//
-//        }
-//
-//        return customerAddToCart;
-//    }
+    @PostMapping("/customers/{email}/cart")
+    @Transactional
+    public Customer saveToCart(@PathVariable String email, @RequestBody Product productsInCart){
+        Customer customerAddToCart = repository.findByEmail(email);
+        if(customerAddToCart != null){
+            customerAddToCart.getShoppingCart().;
+            this.repository.save(customerAddToCart);
+
+        }
+
+        return customerAddToCart;
+    }
 }

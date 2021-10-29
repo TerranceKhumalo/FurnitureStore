@@ -13,14 +13,14 @@ export class CartPageComponent implements OnInit {
 
   private customerData?: Customer;
   itemsInCart: CartItem [] = []
-  subTotal: number = 0;
+  totalPrice: number = 0;
+  totalQuantity: number = 0;
 
   constructor(private customerService: CustomerService, private cartService: CartService) { }
 
   ngOnInit(): void {
     // this.doesCustomerExists();
-    this.itemsInCart = this.cartService.cartItems;
-    this.calculateTotal();
+    this.setCartDetails();
   }
 
   // doesCustomerExists(){
@@ -40,12 +40,32 @@ export class CartPageComponent implements OnInit {
     return 0;
   }
 
-  calculateTotal(){
+  setCartDetails(){
+    this.itemsInCart = this.cartService.cartItems;
+//Set price total
     this.cartService.totalPrice.subscribe(
-      data => this.subTotal = data
+      data => {
+        this.totalPrice = data;
+      }
     );
+//Set quantity total
+    this.cartService.totalQuntity.subscribe(
+      data => this.totalQuantity = data
+    );
+    //calculate function
+    this.cartService.addCartTotal();
   }
 
-  setCartDetails(){
+  incrementQuantity(cartItem: CartItem){
+    this.cartService.saveToCart(cartItem);
+  }
+
+  removeItemInCart(cartItem: CartItem){
+    this.cartService.removeItemInCart(cartItem);
+    this.setCartDetails();
+  }
+
+  decrementItemQuantity(cartItem: CartItem){
+    this.cartService.decrementItemQuantity(cartItem);
   }
 }

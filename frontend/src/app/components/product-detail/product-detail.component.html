@@ -9,12 +9,14 @@
             <h4 class="my-3">{{product.unitPrice | currency}}</h4>
             <p class="my-4">{{product.description}}</p>
             <div class="input-group mt-4 row ">
-                <div class="col-6">
-                    <input class="form-control" type="number" name="" id="">
-                </div>
 
                 <div class="col-6">
-                    <button (click)="addToCart()" class="btn btn-success btn-block" type="submit">Add to Cart</button>
+                    <button (click)="addToCart()" class="btn btn-outline-success btn-block" type="submit">Add to Cart</button>
+                    
+                </div>
+                <div class="col-6">
+                    <button routerLink="/cart" routerLinkActive="router-link-active"  class="btn btn-dark btn-block" type="submit">Procced to Checkout</button>
+                    
                 </div>
                 
                 

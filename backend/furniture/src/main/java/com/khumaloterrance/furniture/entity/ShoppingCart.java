@@ -15,14 +15,18 @@ import java.util.Set;
 @Entity
 //For testing delete afterwards
 @ToString
+@Getter
+@Setter
 public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
-    private Set<ItemsToPurchase> itemsToPurchase = new HashSet<ItemsToPurchase>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
+//    private Set<ItemsToPurchase> itemsToPurchase = new HashSet<ItemsToPurchase>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Product> products;
 
     @Column(name = "date_created")
     @CreationTimestamp
@@ -44,23 +48,23 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public Set<ItemsToPurchase> getItemsToPurchase() {
-        return itemsToPurchase;
-    }
-
-    public void addItemsToPurchase(ItemsToPurchase item) {
-        if(getItemsToPurchase().contains(item)){
-            return;
-        }
-        this.itemsToPurchase.add(item);
-    }
-
-    public void removeItemsToPurchase(ItemsToPurchase item){
-        if(getItemsToPurchase().contains(item)){
-            this.itemsToPurchase.remove(item);
-        }
-        return;
-    }
+//    public Set<ItemsToPurchase> getItemsToPurchase() {
+//        return itemsToPurchase;
+//    }
+//
+//    public void addItemsToPurchase(ItemsToPurchase item) {
+//        if(getItemsToPurchase().contains(item)){
+//            return;
+//        }
+//        this.itemsToPurchase.add(item);
+//    }
+//
+//    public void removeItemsToPurchase(ItemsToPurchase item){
+//        if(getItemsToPurchase().contains(item)){
+//            this.itemsToPurchase.remove(item);
+//        }
+//        return;
+//    }
 
     public Date getDateCreated() {
         return dateCreated;
