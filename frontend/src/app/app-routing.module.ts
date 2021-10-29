@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
   {path: 'shop', component: ProductsPageComponent},
-  {path: 'cart', component: CartPageComponent, canActivate: [OktaAuthGuard]},
+  {path: 'cart', component: CartPageComponent},
   {path: 'products/:id', component: ProductDetailComponent},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginPageComponent},
