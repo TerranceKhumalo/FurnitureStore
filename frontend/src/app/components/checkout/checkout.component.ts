@@ -8,18 +8,33 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CheckoutComponent implements OnInit {
 
-  checkoutFormGroup: FormGroup | undefined;
+  checkoutFormGroup = this.formBuilder.group({
+    customer: this.formBuilder.group({
+      firstName: [''],
+      lastName: [''],
+      email: ['']
+    }),
+    shippingAddress: this.formBuilder.group({
+      street: [''],
+      city: [''],
+      province: [''],
+      zipCode: ['']
+    }),
+    paymentDetials: this.formBuilder.group({
+      cardNumber: [''],
+      securityCode: [''],
+      expirationDate: ['']
+    })
+  });
+
+  provinces = ['Eastern Cape', 'Free State', 'Gauteng', 'KwaZulu-Natal', 'Limpopo', 'Mpumalanga', 'Northern Cape', 'North West'];
 
   constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.checkoutFormGroup = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: [''],
-        lastName: [''],
-        email: ['']
-      })
-    });
-  }
+  ngOnInit(): void { }
 
+  public onSubmit(): void{
+    console.log("Handiling Checkout process.....");
+    console.log(this.checkoutFormGroup.get('shippingAddress')?.value);    
+  }
 }

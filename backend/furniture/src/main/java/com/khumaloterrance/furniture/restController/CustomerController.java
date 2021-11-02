@@ -40,7 +40,7 @@ public class CustomerController {
     public Customer saveToCart(@PathVariable String email, @RequestBody Product productsInCart){
         Customer customerAddToCart = repository.findByEmail(email);
         if(customerAddToCart != null){
-            customerAddToCart.getShoppingCart().;
+            customerAddToCart.getShoppingCart();
             this.repository.save(customerAddToCart);
 
         }
