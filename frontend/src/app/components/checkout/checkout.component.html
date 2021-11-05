@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label for="inputState" class="form-label">State</label>
+                    <label for="inputState" class="form-label">State (Province)</label>
                     <select id="inputState" class="form-select" formControlName="province">
                         <option *ngFor="let province of provinces">{{province}}</option>
                     </select>
@@ -69,6 +69,7 @@
                     <input type="text" class="form-control" id="inputZip" formControlName="zipCode">
                     <div *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)" class="alert alert-danger">
                         <span *ngIf="zipCode?.errors?.['required'] || zipCode?.errors?.['hasOnlyWhiteSpace']">required field.</span>
+                        <span *ngIf="zipCode?.errors?.['minlength']">Zip Code must be minimum 3 characters long.</span>
                     </div>
                 </div>
             </div>
@@ -81,7 +82,8 @@
                         formControlName="cardNumber">
                         <div *ngIf="cardNumber?.invalid && (cardNumber?.dirty || cardNumber?.touched)" class="alert alert-danger">
                             <span *ngIf="cardNumber?.errors?.['required'] || cardNumber?.errors?.['hasOnlyWhiteSpace']"> Card Number is required.</span>
-                            <span *ngIf="cardNumber?.errors?.['minlength']">Card Number must be minimum 8 numbers long.</span>
+                            <span *ngIf="cardNumber?.errors?.['minlength']">Card Number must be minimum 16 numbers long.</span>
+                            <span *ngIf="cardNumber?.errors?.['maxlength']">Card Number must be maximum 16 numbers long.</span>
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -119,7 +121,7 @@
                             <p class="card-text text-muted">Shipping</p>
                         </div>
                         <div class="col text-end fw-bold">
-                            <p>0</p>
+                            <p>{{totalQuntity}}</p>
                             <p>Free</p>
                         </div>
                     </div>
@@ -129,13 +131,8 @@
                             <p class="card-title text-muted">Total</p>
                         </div>
                         <div class="col text-end fw-bold fs-5">
-                            <p>0</p>
+                            <p>{{totalPrice | currency: 'USD'}}</p>
                         </div>
-                    </div>
-
-                    <div>
-                        <a routerLink="#" routerLinkActive="router-link-active"
-                            class="btn btn-success ">Checkout</a>
                     </div>
                 </div>
             </div>

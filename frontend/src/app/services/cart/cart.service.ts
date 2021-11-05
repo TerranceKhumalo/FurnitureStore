@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CartItem } from 'src/app/common/cartItem';
 import { Product } from 'src/app/common/product';
 import { CustomerService } from '../customer/customer.service';
@@ -10,8 +10,8 @@ import { CustomerService } from '../customer/customer.service';
 export class CartService {
   cartItems: CartItem[] = [];
   //publish events to all subscribers.
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuntity: Subject<number> = new Subject<number>();
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuntity: Subject<number> = new BehaviorSubject<number>(0);
 
   constructor(private customerService: CustomerService) { }
 
