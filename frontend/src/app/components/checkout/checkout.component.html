@@ -7,15 +7,31 @@
                 <div class="col-md-6">
                     <label for="inputName4" class="form-label">Name</label>
                     <input type="text" class="form-control" id="inputName4" formControlName="firstName">
+                    <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="alert alert-danger">
+                        <span *ngIf="firstName?.errors?.['required'] || firstName?.errors?.['hasOnlyWhiteSpace']">Name is required.</span>
+                        <span *ngIf="firstName?.errors?.['minlength']">Name must be minimum 3 characters long.</span>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <label for="inputLastName4" class="form-label">LastName</label>
                     <input type="text" class="form-control" id="inputLastName4" formControlName="lastName">
+                    <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)" class=" alert alert-danger">
+                        <span *ngIf="lastName?.errors?.['minlength']">
+                            Name must be minimum 3 characters long.
+                        </span>
+                        <span *ngIf="lastName?.errors?.['required'] || lastName?.errors?.['hasOnlyWhiteSpace']">
+                            Name is required.
+                        </span>
+                    </div>
                 </div>
 
                 <div class="col-12">
                     <label for="inputEmail4" class="form-label">Email</label>
                     <input type="email" class="form-control" id="inputEmail4" formControlName="email">
+                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+                        <span *ngIf="email?.errors?.['required']"> Email is required.</span>
+                        <span *ngIf="email?.errors?.['email']">Must be a valid email.</span>
+                    </div>
                 </div>
             </div>
             <!--SHIPPING ADDRESS-->
@@ -25,21 +41,35 @@
                     <label for="inputAddress" class="form-label">Address</label>
                     <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
                         formControlName="street">
+                        <div *ngIf="street?.invalid && (street?.dirty || street?.touched)" class="alert alert-danger">
+                            <span *ngIf="street?.errors?.['required'] || street?.errors?.['hasOnlyWhiteSpace']"> Street is required.</span>
+                            <span *ngIf="street?.errors?.['minlength']">Name must be minimum 3 characters long.</span>
+                        </div>
                 </div>
 
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
                     <input type="text" class="form-control" id="inputCity" formControlName="city">
+                    <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="alert alert-danger">
+                        <span *ngIf="city?.errors?.['required'] || city?.errors?.['hasOnlyWhiteSpace']"> City is required.</span>
+                        <span *ngIf="city?.errors?.['minlength']">Name must be minimum 3 characters long.</span>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <label for="inputState" class="form-label">State</label>
                     <select id="inputState" class="form-select" formControlName="province">
                         <option *ngFor="let province of provinces">{{province}}</option>
                     </select>
+                    <div *ngIf="province?.invalid && (province?.dirty || province?.touched)" class="alert alert-danger">
+                        <span *ngIf="province?.errors?.['required'] || province?.errors?.['hasOnlyWhiteSpace']"> Province is required.</span>
+                    </div>
                 </div>
                 <div class="col-md-2">
                     <label for="inputZip" class="form-label">Zip</label>
                     <input type="text" class="form-control" id="inputZip" formControlName="zipCode">
+                    <div *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)" class="alert alert-danger">
+                        <span *ngIf="zipCode?.errors?.['required'] || zipCode?.errors?.['hasOnlyWhiteSpace']">required field.</span>
+                    </div>
                 </div>
             </div>
             <!--PAYMENT DETAILS-->
@@ -49,15 +79,26 @@
                     <label for="inputCardNum" class="form-label">Credit Card Number</label>
                     <input type="text" class="form-control" id="inputCardNum" placeholder="0000-0000-0000-0000"
                         formControlName="cardNumber">
+                        <div *ngIf="cardNumber?.invalid && (cardNumber?.dirty || cardNumber?.touched)" class="alert alert-danger">
+                            <span *ngIf="cardNumber?.errors?.['required'] || cardNumber?.errors?.['hasOnlyWhiteSpace']"> Card Number is required.</span>
+                            <span *ngIf="cardNumber?.errors?.['minlength']">Card Number must be minimum 8 numbers long.</span>
+                        </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-6">
                     <label for="inputSecurityCode" class="form-label">Security Code</label>
                     <input type="text" class="form-control" id="inputSecurityCode" placeholder="0000"
                         formControlName="securityCode">
+                        <div *ngIf="securityCode?.invalid && (securityCode?.dirty || securityCode?.touched)" class="alert alert-danger">
+                            <span *ngIf="securityCode?.errors?.['required'] || securityCode?.errors?.['hasOnlyWhiteSpace']"> Card Number is required.</span>
+                            <span *ngIf="securityCode?.errors?.['minlength']">Card Number must be minimum 3 numbers long.</span>
+                        </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-6">
                     <label for="inputExpirationDate" class="form-label">Expiration Date</label>
                     <input type="date" class="form-control" id="inputExpirationDate" formControlName="expirationDate">
+                    <div *ngIf="expirationDate?.invalid && (securityCode?.dirty || expirationDate?.touched)" class="alert alert-danger">
+                        <span *ngIf="expirationDate?.errors?.['required'] || expirationDate?.errors?.['hasOnlyWhiteSpace']"> Expiration Date is required.</span>
+                    </div>
                 </div>
             </div>
 
