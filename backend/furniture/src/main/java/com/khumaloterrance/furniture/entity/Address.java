@@ -8,12 +8,11 @@ import javax.persistence.*;
 
 @Table(name = "customer_address")
 @Entity
-
 @Setter
 @Getter
 //For testing delete afterwards
 @ToString
-public class CustomerAddress {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +26,7 @@ public class CustomerAddress {
 
     private String country;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
-    private Customer customer;
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Order order;
 }

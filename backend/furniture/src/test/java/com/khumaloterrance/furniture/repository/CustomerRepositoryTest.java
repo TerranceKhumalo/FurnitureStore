@@ -1,16 +1,12 @@
 package com.khumaloterrance.furniture.repository;
 
 import com.khumaloterrance.furniture.entity.Customer;
-import com.khumaloterrance.furniture.entity.ShoppingCart;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
 

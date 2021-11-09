@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -16,18 +18,24 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String firstName;
 
-    private String surname;
+    private String lastName;
 
     @Column(unique = true)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private CustomerAddress address;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @JoinColumn(name = "orders_id")
+    private Set<Order> orders = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private ShoppingCart shoppingCart;
+    public void add(Order order){
+        if(order != null){
+            if(orders == null){
+                orders = new HashSet<>();
+            }
+            orders.add(order);
+            order.setCustomer(this);
+        }
+    }
 }
