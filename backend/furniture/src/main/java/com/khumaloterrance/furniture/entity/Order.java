@@ -45,6 +45,7 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<ItemToPurchase> itemsToPurchase = new HashSet<>();
 
+    //Add item to purchase set
     public void add(ItemToPurchase item){
         if(item != null){
             if(itemsToPurchase == null ){itemsToPurchase = new HashSet<>();}
