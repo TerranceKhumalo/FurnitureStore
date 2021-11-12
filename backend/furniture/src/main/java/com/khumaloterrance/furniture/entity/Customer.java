@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
@@ -26,7 +26,6 @@ public class Customer {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    @JoinColumn(name = "orders_id")
     private Set<Order> orders = new HashSet<>();
 
     public void add(Order order){

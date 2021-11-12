@@ -45,6 +45,7 @@ export class NavBarComponent implements OnInit {
   }
 
   //Version 2
+  //TODO: Clean up method to remove unused fields.
   getUserDetails() {
     if (this.isAuthenticated) {
       this.oktaAuthService.getUser().then(
@@ -53,12 +54,11 @@ export class NavBarComponent implements OnInit {
           this.customerService.checkCustomerInDatabase(res.email).subscribe(
             customerResponseData => {
               //Assign Okta customer to local service Customer service.
-              this.assignCustomerToServiceCustomer({...customerResponseData})
+              
             },
             //When User is not found in local database save user to database
             errNoCustomer => {
               console.log("User does not exist in database creating user..." + errNoCustomer);
-              this.handleSaveCustomerToDatabse(res);
             }
           );
         }
@@ -68,23 +68,24 @@ export class NavBarComponent implements OnInit {
 
   
 
-  handleSaveCustomerToDatabse(customerDetails: UserClaims){
-    //Validate that details are not undefined.
-    if (customerDetails.given_name && customerDetails.family_name && customerDetails.email) {
-      this.customerService.saveCustomerToDatabase(customerDetails.given_name, customerDetails.family_name, customerDetails.email).subscribe(
-        saveResponse => {
-          this.assignCustomerToServiceCustomer({...saveResponse});
-        }
-      );
-    }
-  }
+  // handleSaveCustomerToDatabse(customerDetails: UserClaims){
+  //   //Validate that details are not undefined.
+  //   if (customerDetails.given_name && customerDetails.family_name && customerDetails.email) {
+  //     this.customerService.saveCustomerToDatabase(customerDetails.given_name, customerDetails.family_name, customerDetails.email).subscribe(
+  //       saveResponse => {
+  //         this.assignCustomerToServiceCustomer({...saveResponse});
+  //       }
+  //     );
+  //   }
+  // }
 
   //Assign customer details to local varibale in customer service.
-  assignCustomerToServiceCustomer(customerData: Customer) {
-    this.customerService.setCustomerDetails({ ...customerData })
-    this.userName = this.customerService.getCustomerDetails().name;
-    console.log(customerData);
-  }
+  //TODO: update method to retrive customer data on OKTA
+  // assignCustomerToServiceCustomer(customerData: Customer) {
+  //   this.customerService.setCustomerDetails({ ...customerData })
+  //   this.userName = this.customerService.getCustomerDetails().name;
+  //   console.log(customerData);
+  // }
 
   //version 2 logout
   logout() {

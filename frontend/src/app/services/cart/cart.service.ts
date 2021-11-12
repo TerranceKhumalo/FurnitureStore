@@ -9,11 +9,22 @@ import { CustomerService } from '../customer/customer.service';
 })
 export class CartService {
   cartItems: CartItem[] = [];
+  CART_ITEMS_KEY = 'cartItems';
   //publish events to all subscribers.
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuntity: Subject<number> = new BehaviorSubject<number>(0);
+  storage: Storage = localStorage;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService) {
+
+    //Check if there is any cart items saved in the session storage
+    let data = this.storage.getItem(this.CART_ITEMS_KEY);
+
+    if(data != null){
+      this.cartItems = JSON.parse(data);
+      this.addCartTotal();
+    }
+   }
 
 //   saveToCart(product: Product, currentCustomer: Customer, customerCartItem: CartItem){
     
@@ -96,6 +107,7 @@ export class CartService {
     this.totalQuntity.next(totalQuantityValue);
 
     this.logDataTest(totalPriceValue, totalQuantityValue);
+    this.saveToStorage();
   }
   //TODO: DELETE AFTER TESTING
   logDataTest(totalPriceValue: number, totalQuantityValue: number) {
@@ -105,6 +117,10 @@ export class CartService {
       console.log(`Name ${item.name} , quantity: ${item.quantity} and price: ${item.unitPrice} Total cost: ${subTotal.toFixed(2)}`);
     }
     console.log(`Total Price Value: ${totalPriceValue.toFixed(2)} and Total Quantity Value: ${totalQuantityValue}`);
+  }
+
+  private saveToStorage(){
+    this.storage.setItem(this.CART_ITEMS_KEY, JSON.stringify(this.cartItems));
   }
 
 

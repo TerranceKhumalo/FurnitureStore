@@ -1,4 +1,3 @@
-import { ShoppingCart } from "./shoppingCart";
 
 export class Product {
     id: number | undefined;
@@ -11,5 +10,4 @@ export class Product {
     unitsInStock: number | undefined;
     dateCreated: Date | undefined;
     lastUpdated: Date | undefined;
-    // cart: ShoppingCart | undefined;
 }

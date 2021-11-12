@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ItemToPurchase } from 'src/app/common/item-to-purchase';
+import { Order } from 'src/app/common/order';
+import { Purchase } from 'src/app/common/purchase';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { CheckoutService } from 'src/app/services/checkout/checkout.service';
 import { FurniterShopValidators } from 'src/app/validators/furniterShopValidators';
 
 @Component({
@@ -20,10 +25,11 @@ export class CheckoutComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     }),
     shippingAddress: this.formBuilder.group({
-      street: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]],
+      streetName: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]],
       city: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]],
-      province: ['', [Validators.required, FurniterShopValidators.hasOnlyWhiteSpace]],
-      zipCode: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]]
+      country: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]],
+      state: ['', [Validators.required, FurniterShopValidators.hasOnlyWhiteSpace]],
+      zipCode: ['', [Validators.required, Validators.minLength(3)]]
     }),
     paymentDetials: this.formBuilder.group({
       cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), FurniterShopValidators.hasOnlyWhiteSpace]],
@@ -34,7 +40,7 @@ export class CheckoutComponent implements OnInit {
 
   provinces = ['  ', 'Eastern Cape', 'Free State', 'Gauteng', 'KwaZulu-Natal', 'Limpopo', 'Mpumalanga', 'Northern Cape', 'North West'];
 
-  constructor(private formBuilder: FormBuilder, private cartService: CartService) { }
+  constructor(private formBuilder: FormBuilder, private cartService: CartService, private checkout: CheckoutService, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -47,10 +53,61 @@ export class CheckoutComponent implements OnInit {
 
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
+      return;
     }
-
-    console.log(this.checkoutFormGroup.get('shippingAddress')?.value);
+    this.handleFormSubmition();
+    // console.log(this.checkoutFormGroup.get('shippingAddress')?.value);
   }
+  //Collect all data from the form and assign it to objects to be sent to the database.
+  handleFormSubmition(){
+    //Assign current total price and quantity to new order object.
+    const order = new Order();
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuntity;
+//Retrieve all items in the cart and add them to purchase item to be sent to the database. 
+    const itemsToPurchase: ItemToPurchase[] = this.cartService.cartItems.map(item=>new ItemToPurchase(item));
+
+  //Create purchase object and assign custom fields
+  const purchase = new Purchase();
+
+  purchase.customer = this.checkoutFormGroup.get('customer')?.value;
+  
+  //Assgin shipping address to purchase object
+  purchase.shippingAddress = this.checkoutFormGroup.get('shippingAddress')?.value;
+
+    //Assgin orders to purchase object
+    purchase.order = order;
+
+  //Assgin items To Purchase to purchase object
+  purchase.itemsToPurchase = itemsToPurchase;
+
+  if (this.totalQuntity > 0) {
+    this.checkout.placeOrder(purchase).subscribe(
+      response=>{
+        alert(`Your order was successful.\n Your order tracking number is: ${response.orderTrackingNumber}`)
+        this.restCart();
+      },
+      err=>{
+        alert(`Your order was unsuccessful, the was an error.\n Error: ${err.message}`)
+      }
+    );
+  }
+
+  console.log(purchase);
+  }
+
+  //Rest all values to thier default values
+  restCart() {
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuntity.next(0);
+
+    this.checkoutFormGroup.reset();
+
+    this.router.navigateByUrl("/shop")
+  }
+
+
   reviewCartDetails() {
     this.cartService.totalPrice.subscribe(
       totalPrice => this.totalPrice = totalPrice
@@ -65,10 +122,11 @@ export class CheckoutComponent implements OnInit {
   get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
   get email() { return this.checkoutFormGroup.get('customer.email'); }
   //Shipping getters
-  get street() { return this.checkoutFormGroup.get('shippingAddress.street'); }
+  get streetName() { return this.checkoutFormGroup.get('shippingAddress.streetName'); }
   get city() { return this.checkoutFormGroup.get('shippingAddress.city'); }
-  get province() { return this.checkoutFormGroup.get('shippingAddress.province'); }
+  get state() { return this.checkoutFormGroup.get('shippingAddress.state'); }
   get zipCode() { return this.checkoutFormGroup.get('shippingAddress.zipCode'); }
+  get country() { return this.checkoutFormGroup.get('shippingAddress.country'); }
 
   //Payment details getters
   get cardNumber() { return this.checkoutFormGroup.get('paymentDetials.cardNumber'); }

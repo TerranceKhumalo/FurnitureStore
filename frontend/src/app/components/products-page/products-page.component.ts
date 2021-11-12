@@ -62,8 +62,6 @@ export class ProductsPageComponent implements OnInit {
       this.paginationPageNumber = 1;
     }
     this.priviousCatagoryId = this.currentCatagoryId;
-    // console.log(`current category id ${this.currentCatagoryId} and privoius category id ${this.priviousCatagoryId}`);
-    // console.log(`pagination number ${this.paginationPageNumber}`);
     
 
     this.productService.getProductListPagination(--this.paginationPageNumber, this.paginationPageSize, this.currentCatagoryId)

@@ -10,16 +10,9 @@ export class CustomerService {
 
   private productURL:string = 'http://localhost:8080/api/customers';
   private customerDetails: Customer = {
-    name: 'Dummy Name',
-    surname: 'Dummy Surname',
+    firstName: 'Dummy Name',
+    lastName: 'Dummy Surname',
     email: 'dummy@gmail.com',
-    address: {
-      streetName: 'dummy street',
-      city: 'dummy city',
-      country: 'dummy country',
-      zipCode: 0o00
-    },
-    shoppingCart: undefined
   };
 
   constructor(private httpClient: HttpClient) { }
