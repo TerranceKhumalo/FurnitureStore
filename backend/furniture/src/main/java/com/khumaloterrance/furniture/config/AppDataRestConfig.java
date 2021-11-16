@@ -1,8 +1,10 @@
 package com.khumaloterrance.furniture.config;
 
+import com.khumaloterrance.furniture.entity.Order;
 import com.khumaloterrance.furniture.entity.Product;
 import com.khumaloterrance.furniture.entity.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -21,11 +23,14 @@ public class AppDataRestConfig implements RepositoryRestConfigurer {
     @Autowired
     private EntityManager entityManager;
 
+    @Value("${allowed.origins}")
+    private String[] allowedOrigins;
+
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
 
-        HttpMethod [] unsupportedActions = {HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH};
+        HttpMethod [] unsupportedActions = {HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH, HttpMethod.PUT};
 
         //disable Http method: PUT, POST and DELETE for PRODUCTS
         config.getExposureConfiguration()
@@ -39,7 +44,15 @@ public class AppDataRestConfig implements RepositoryRestConfigurer {
                 .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
                 .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
 
+        //disable Http method: PUT, POST and DELETE for Order Entity
+        config.getExposureConfiguration()
+                .forDomainType(Order.class)
+                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
+                .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
+
         exposeIds(config);
+
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(this.allowedOrigins);
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {

@@ -2,8 +2,8 @@ package com.khumaloterrance.furniture.repository;
 
 import com.khumaloterrance.furniture.entity.ItemToPurchase;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@CrossOrigin("http://localhost:4200")
+@RepositoryRestResource
 public interface ItemsToPurchaseRepository extends JpaRepository<ItemToPurchase, Long> {
 }
