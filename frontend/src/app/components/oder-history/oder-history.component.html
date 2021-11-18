@@ -1,0 +1,37 @@
+<Section class="container">
+    <div>
+        <h1 class="text-center">Order History</h1>
+    </div>
+    <div class="row" *ngIf="orders.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Order Tracking Number</th>
+              <th scope="col">Total Quantity</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Order Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="w-75" *ngFor="let order of orders; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>
+                {{ order.orderTrackingNumber }}
+              </td>
+              <td>{{ order.totalQuantity | number }}</td>
+              <td>{{ order.totalPrice | currency: 'USD' }}</td>
+              <td>{{ order.dateCreated | date }}</td>
+            </tr>
+            </tbody>
+          </table>
+    </div>
+    <!--If no orders found display this-->
+    <div class="row container" *ngIf="orders.length == 0">
+        <div class="center ">
+            <img width="50%" src="/assets/images/empty-cart.png" alt="A Carrot being pulled out">
+            <h3 >No Orders.</h3>
+            <a routerLink="/shop" routerLinkActive="router-link-active" class="btn btn-outline-success">Go Shopping</a>
+        </div>
+    </div>
+</Section>

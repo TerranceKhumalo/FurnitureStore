@@ -45,7 +45,13 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
 }
+.card-header{
+    background-color: white;
+}
 
-/* .btn{
-    border-radius: 50px;
-} */
+.center{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 15%;
+}

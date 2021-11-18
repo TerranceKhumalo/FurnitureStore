@@ -11,6 +11,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { OrderHistoryService } from './services/oreder-history.service';
+import { OderHistoryComponent } from './components/oder-history/oder-history.component';
 
 // const oktaConfig = Object.assign({
 //   onAuthRequired: (oktaAuth, inject: { get: (arg0: typeof Router) => any; })=>{
@@ -24,6 +26,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent, canActivate: [OktaAuthGuard]},
   {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
+  {path: 'orders', component: OderHistoryComponent, canActivate: [OktaAuthGuard]},
   {path: 'shop', component: ProductsPageComponent},
   {path: 'cart', component: CartPageComponent},
   {path: 'products/:id', component: ProductDetailComponent},

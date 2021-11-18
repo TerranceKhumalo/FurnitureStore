@@ -18,6 +18,8 @@ export class NavBarComponent implements OnInit {
   public customerDetails: Customer | undefined;
   public userName: string | undefined;
 
+  storage: Storage = sessionStorage;
+
   totalQuantityItems: number = 0;
   totalItemPrice: number = 0;
 
@@ -34,8 +36,8 @@ export class NavBarComponent implements OnInit {
     this.updateCartStatus();
   }
 
-   //Update total cost and Quantity of items.
-   updateCartStatus(){
+  //Update total cost and Quantity of items.
+  updateCartStatus() {
     this.cartService.totalPrice.subscribe(
       data => this.totalItemPrice = data
     );
@@ -51,22 +53,18 @@ export class NavBarComponent implements OnInit {
       this.oktaAuthService.getUser().then(
         res => {
           //Check if user in OKTA exists in local database.
-          this.customerService.checkCustomerInDatabase(res.email).subscribe(
-            customerResponseData => {
-              //Assign Okta customer to local service Customer service.
-              
-            },
-            //When User is not found in local database save user to database
-            errNoCustomer => {
-              console.log("User does not exist in database creating user..." + errNoCustomer);
-            }
-          );
-        }
-      )
+          // this.customerService.checkCustomerInDatabase(res.email).subscribe(
+          //   customerResponseData => {
+
+          //   },
+          const customerEmail = res.email;
+          //Save user email to be used 
+          this.storage.setItem('userEmail', JSON.stringify(customerEmail));
+        });
     }
   }
 
-  
+
 
   // handleSaveCustomerToDatabse(customerDetails: UserClaims){
   //   //Validate that details are not undefined.

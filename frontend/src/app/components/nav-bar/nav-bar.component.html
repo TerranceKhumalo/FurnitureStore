@@ -21,6 +21,9 @@
           <a class="nav-link disabled" routerLink="'.'" tabindex="-1" aria-disabled="true">About Us</a>
         </li>
         <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link" routerLink="/orders">Orders</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
           <a class="nav-link" routerLink="/admin">DashBorad</a>
         </li>
       </ul>

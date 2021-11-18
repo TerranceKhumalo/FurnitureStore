@@ -24,6 +24,7 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { OderHistoryComponent } from './components/oder-history/oder-history.component';
 
 const oktaConfig = Object.assign({
   onAuthRequired: (inject: any)=>{
@@ -48,7 +49,8 @@ const oktaConfig = Object.assign({
     CartPageComponent,
     FooterComponent,
     CheckoutComponent,
-    AdminComponent
+    AdminComponent,
+    OderHistoryComponent
   ],
   imports: [
     BrowserModule,

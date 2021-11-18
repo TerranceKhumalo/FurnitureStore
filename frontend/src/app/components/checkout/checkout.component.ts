@@ -16,13 +16,15 @@ import { FurniterShopValidators } from 'src/app/validators/furniterShopValidator
 export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuntity: number = 0;
+  private storage: Storage = sessionStorage;
 
+  customerEmail = JSON.parse(this.storage.getItem('userEmail')!);
 
   checkoutFormGroup = this.formBuilder.group({
     customer: this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]],
       lastName: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]],
-      email: ['', [Validators.required, Validators.email]]
+      email: [this.customerEmail, [Validators.required, Validators.email]]
     }),
     shippingAddress: this.formBuilder.group({
       streetName: ['', [Validators.required, Validators.minLength(3), FurniterShopValidators.hasOnlyWhiteSpace]],
@@ -40,7 +42,9 @@ export class CheckoutComponent implements OnInit {
 
   provinces = ['  ', 'Eastern Cape', 'Free State', 'Gauteng', 'KwaZulu-Natal', 'Limpopo', 'Mpumalanga', 'Northern Cape', 'North West'];
 
-  constructor(private formBuilder: FormBuilder, private cartService: CartService, private checkout: CheckoutService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private cartService: CartService, private checkout: CheckoutService, private router: Router) { 
+
+  }
 
 
   ngOnInit(): void {
@@ -104,7 +108,7 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutFormGroup.reset();
 
-    this.router.navigateByUrl("/shop")
+    this.router.navigateByUrl("/orders")
   }
 
 
