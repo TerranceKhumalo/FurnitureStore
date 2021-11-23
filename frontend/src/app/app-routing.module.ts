@@ -11,7 +11,6 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { OrderHistoryService } from './services/oreder-history.service';
 import { OderHistoryComponent } from './components/oder-history/oder-history.component';
 
 // const oktaConfig = Object.assign({
@@ -24,18 +23,18 @@ import { OderHistoryComponent } from './components/oder-history/oder-history.com
 
 const routes: Routes = [
   {path: 'admin', component: AdminComponent, canActivate: [OktaAuthGuard]},
-  {path: 'home', component: HomePageComponent, canActivate: [OktaAuthGuard]},
+  {path: 'home', component: HomePageComponent},
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
   {path: 'orders', component: OderHistoryComponent, canActivate: [OktaAuthGuard]},
   {path: 'shop', component: ProductsPageComponent},
-  {path: 'cart', component: CartPageComponent},
+  {path: 'cart', component: CartPageComponent, canActivate: [OktaAuthGuard]},
   {path: 'products/:id', component: ProductDetailComponent},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'category/:id', component: ProductsPageComponent},
   {path: 'search/:keyword', component: ProductsPageComponent},
   {path: 'register', component: RegistrationPageComponent},
-  {path: 'checkout', component: CheckoutComponent},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [OktaAuthGuard]},
   {path: '**', component: ErrorPageComponent}
   
 ];
