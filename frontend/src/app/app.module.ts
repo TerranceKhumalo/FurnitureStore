@@ -11,7 +11,6 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
-import { HttpInterceptBasicAuthService } from './services/http/http-intercept-basic-auth.service';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
@@ -25,6 +24,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { OderHistoryComponent } from './components/oder-history/oder-history.component';
+import { AuthInterceptorServiceService } from './services/authHttp/auth-interceptor-service.service';
 
 const oktaConfig = Object.assign({
   onAuthRequired: (inject: any)=>{
@@ -61,7 +61,7 @@ const oktaConfig = Object.assign({
     NgbModule
   ],
   providers: [
-    // {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptBasicAuthService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorServiceService, multi: true},
     {provide: OKTA_CONFIG, useValue: oktaConfig}
   ],
   bootstrap: [AppComponent]

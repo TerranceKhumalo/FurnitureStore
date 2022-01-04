@@ -1,9 +1,11 @@
 package com.khumaloterrance.furniture.config;
 
 import com.okta.spring.boot.oauth.Okta;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+@Configuration
 public class OktaOAuth2WebSecurityConfigureAdapter extends WebSecurityConfigurerAdapter {
 
 
@@ -16,12 +18,12 @@ public class OktaOAuth2WebSecurityConfigureAdapter extends WebSecurityConfigurer
                 .oauth2ResourceServer()
                 .jwt();
                 // enable OAuth2/OIDC
-//                .and()
-//                .oauth2Login();
 
         //CORS filters
         http.cors();
         //http response for unauthorized users
         Okta.configureResourceServer401ResponseBody(http);
+        //disable cross site forgery
+        http.csrf().disable();
     }
 }
